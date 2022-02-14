@@ -19,6 +19,7 @@ TILDAHEADERFILES=	inc/jude_widgets.h\
 		inc/jude.h\
 		inc/karljr.h
 
+.PHONY:		clean
 
 lib/libtilda.a:	$(TILDACCFILES:.c=.o) $(TILDAASMFILES:.s=.o) 
 		$(warning ======== Making: $@)
@@ -42,5 +43,9 @@ $(TILDACCFILES):	$(TILDAHEADERFILES)
 
 $(TILDAASMFILES):	$(TILDAINCFILES)
 
+ifeq ($(OS),Windows_NT)     # is Windows_NT on XP, 2000, 7, Vista, 10...
 clean:
 		for %%f in (.\\src\\*.o .\\src\\jude.s .\\src\\karljr.s .\\lib\\libtilda.a) do del %%f
+else
+
+endif
