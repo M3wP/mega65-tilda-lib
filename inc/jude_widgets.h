@@ -3,6 +3,7 @@
 #define	INCLUDE_JUDE_WIDGETS_H
 
 #include	"jude.h"
+#include	"karljr.h"
 
 typedef	struct	TABBAR {
 		judeBar_t		_bar;

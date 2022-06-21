@@ -43,6 +43,12 @@ $(TILDACCFILES):	$(TILDAHEADERFILES)
 
 $(TILDAASMFILES):	$(TILDAINCFILES)
 
+
+testa.prg:	lib/libtilda.a tests/testa.c
+		$(warning ======== Making: $@)
+		cl65 -t c64 --config tilda.cfg $(COPTS) -I/inc --lib-path ./lib -o testa.prg tests/testa.c libtilda.a
+
+
 ifeq ($(OS),Windows_NT)     # is Windows_NT on XP, 2000, 7, Vista, 10...
 clean:
 		for %%f in (.\\src\\*.o .\\src\\jude.s .\\src\\karljr.s .\\lib\\libtilda.a) do del %%f

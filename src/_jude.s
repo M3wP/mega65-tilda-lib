@@ -486,6 +486,9 @@ _JudeSetPointer:
 		CMP	#MPTR_WAIT
 		BNE	@exit
 
+		LDX	$D020
+		STX	jude_brdbak
+
 		INW	zregBwl
 		INW	zregBwl
 		INW	zregBwl
@@ -498,6 +501,9 @@ _JudeSetPointer:
 
 @move:
 		STA	jude_mptrstate
+
+		LDA	jude_brdbak
+		STA $D020
 
 ;	Sprite pointer
 		LDZ	#$00
@@ -1549,6 +1555,7 @@ _JudeDefViewInit:
 		LDX	#>CLR_EMPTY
 		JSR	_JudeLogClrToSys
 		STA	$D020
+		STA	jude_brdbak
 
 		LDA	#<CLR_BACK
 		LDX	#>CLR_BACK
@@ -4504,6 +4511,9 @@ __JudeProxy:
 ;-----------------------------------------------------------
 		JMP	(jude_proxyptr)
 
+
+	.data
+
 mod_jude_core:
 ;	Object
 		.byte		.sizeof(MODULE)			;size
@@ -4712,6 +4722,8 @@ jude_coloury0:
 jude_theme:
 		.res	15, 0
 
+jude_brdbak:
+		.byte	$00
 
 ;-----------------------------------------------------------
 ;Mouse driver variables
